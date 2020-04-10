@@ -1,10 +1,10 @@
 <template>
-  <div class="hello">
+  <div class="navbar-container">
     <nav class="navbar custom-nav fixed-top navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="/">
+        <router-link to="/" class="navbar-brand">
           <img src="img/logo.png">
-        </a>
+        </router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,10 +12,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <router-link to="/home" class="nav-link" href="#">Home</router-link>
+              <router-link to="/" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/about" class="nav-link" href="#">About</router-link>
+              <router-link to="/products" class="nav-link">Products</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/about" class="nav-link">About</router-link>
             </li>
           
           </ul>
@@ -41,10 +44,37 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @media screen and (min-width: 992px){
+
+  .navbar-container {
+    text-align: center;
+  }
+
+  .nav-item a.nav-link{
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50 !important;
+  }
+
+  .nav-item a.nav-link:hover{
+    color: #42b983 !important;
+  }
+
+  @media (min-width: 992px) { 
     .navbar.custom-nav {
-      top: 16px;
-      background-color: transparent !important;
+      background-color: #fff !important;
     }
   }
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    .form-inline {
+      display: inline-block !important;
+    }
+  }
+
+  @media screen and (min-width: 576px) and (max-width: 767px) {
+    .form-inline {
+      display: inline-block !important;
+    }
+  }
+
 </style>

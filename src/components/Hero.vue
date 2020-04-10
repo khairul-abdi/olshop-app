@@ -11,8 +11,8 @@
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque doloremque, doloribus provident asperiores vel eos quam eligendi et sunt aspernatur. Placeat veritatis in libero minus adipisci tempora repellendus iste non!
             </p>
             <div class="hero-btn mt-5">
-              <button class="btn custom-btn btn-info mr-4">Explore</button>
-              <button class="btn custom-btn btn-outline-secondary">Products</button>
+                <button class="btn custom-btn btn-info mr-4">Explore</button>
+                <button class="btn custom-btn btn-outline-secondary">Products</button>
             </div>
           </div>
         </div>
@@ -36,10 +36,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    .btn-outline-secondary {
+      margin-top: 10px;
+    }
+  } 
+
   .hero {
     padding-top: 7rem;
     width: 100%;
-    height: 150px;
+    height: 500px;
     text-align: left;
   }
 </style>
