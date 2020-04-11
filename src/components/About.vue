@@ -1,5 +1,6 @@
 <template>
-  <div class="container h-100">
+  <div id="about" class="container h-100">
+    <h1 class="text-center p-4">About Us</h1>
     <div class="row p-5 h-100 justify-content-center align-items-center">
       <div class="col-md-6">
         <img src="/img/svg/shop-bag/1.svg" alt="" width="400">
