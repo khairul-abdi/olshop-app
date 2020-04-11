@@ -67,7 +67,7 @@ export default {
 
   li.nav-item.active a{
     color: #42b983 !important;
-    transition: all 0.5s;
+    transition: all 0.3s;
   }
 
   @media (min-width: 992px) { 
