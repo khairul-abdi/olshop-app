@@ -108,6 +108,7 @@
 
 <script>
 import Hero from '@/components/Hero.vue'
+import { fb } from '../firebase'
 
 export default {
   name: 'Admin',
@@ -145,6 +146,15 @@ export default {
             }
         )
       }
+    },
+    logout() {
+      fb.auth().signOut()
+      .then(() => {
+        this.$router.replace('/')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
   }
 }
