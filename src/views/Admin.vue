@@ -14,7 +14,7 @@
             <div class="sidebar-content">
                 <!-- sidebar-brand  -->
                 <div class="sidebar-item sidebar-brand">
-                    <a>pro sidebar</a>
+                    <a>olshop app</a>
                     <div id="pin-sidebar" @click="pinMenu">
                       <i class="fa fa-eject fa-rotate-270 mr-3"></i>
                     </div>
@@ -55,50 +55,38 @@
                 <div class=" sidebar-item sidebar-menu">
                     <ul>
                         <li class="header-menu">
-                            <span>General</span>
+                            <span>Menu</span>
                         </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-tachometer-alt"></i>
-                                <span class="menu-text">Dashboard</span>
-                                <span class="badge badge-pill badge-warning">New</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Dashboard 1
-                                            <span class="badge badge-pill badge-success">Pro</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard 3</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header-menu">
-                            <span>Extra</span>
+                        
+                         <li>
+                            <router-link to="/admin/overview">
+                                <i class="fa fa-chart-line"></i>
+                                <span>Overview</span>
+                            </router-link>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-book"></i>
-                                <span class="menu-text">Documentation</span>
-                                <span class="badge badge-pill badge-primary">Beta</span>
-                            </a>
+                            <router-link to="/admin/products">
+                                <i class="fab fa-amazon"></i>
+                                <span>Products</span>
+                            </router-link>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-calendar"></i>
-                                <span class="menu-text">Calendar</span>
-                            </a>
+                            <router-link to="/admin/orders">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Orders</span>
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link to="/admin/profile">
+                                <i class="fa fa-user"></i>
+                                <span>Profile</span>
+                            </router-link>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-folder"></i>
-                                <span class="menu-text">Examples</span>
+                            <a href="#" @click="logout()">
+                                <i class="fa fa-power-off"></i>
+                                <span>Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -110,40 +98,11 @@
         </nav>
         <!-- page-content  -->
         <main class="page-content pt-2">
-            <div id="overlay" class="overlay"></div>
-            <div class="container-fluid p-5">
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <h2>Pro Sidebar</h2>
-                        <p>This is a responsive sidebar template with dropdown menu based on bootstrap framework.</p>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <a 
-                          id="toggle-sidebar" 
-                          class="btn btn-secondary rounded-0" 
-                          @click="closeMenu"
-                        >
-                            <span>Toggle Sidebar</span>
-                        </a>
-                        <a id="pin-sidebar" 
-                          class="btn btn-outline-secondary rounded-0" 
-                          href="#"
-                          @click="pinMenu"
-                        >
-                            <span>Pin Sidebar</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
+          <router-view/>
         </main>
         <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
-
-    
-
   </div>
 </template>
 
@@ -189,6 +148,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
