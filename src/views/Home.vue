@@ -13,7 +13,9 @@
         <About/>
       </div>
     </div>
-    <Login></Login>
+    <div>
+      <Login></Login>
+    </div>
   </div>
 </template>
 

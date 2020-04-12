@@ -32,10 +32,12 @@
                             </div>
 
                              <div class="form-group">
-                                <button class="btn btn-success" @click="login">Login</button>
+                                <button class="btn btn-primary">Login</button>
                             </div>
 
                         </div>
+
+
                         <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
                             
                              <h5 class="text-center">Create New Account</h5>
@@ -55,7 +57,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-success" @click="register">Signup</button>
+                                <button class="btn btn-primary" @click="register">Signup</button>
                             </div>
 
                         </div>
@@ -71,7 +73,32 @@
 </template>
 
 <script>
+import { fb } from '../firebase'
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  data() {
+    return {
+      name: null,
+      email: null,
+      password: null
+    }
+  },
+  methods: {
+    register() {
+      fb.auth().createUserWithEmailAndPassword(this.email, this.password)
+        .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+      });
+    }
+  }
 }
 </script>
