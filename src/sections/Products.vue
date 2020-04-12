@@ -103,7 +103,6 @@ export default {
 <style lang="scss" scoped>
   .products {
     margin-top: 7rem;
-    // margin-top: 30rem;
     background: #f2f2f2;
     padding-bottom: 3rem;
   }

@@ -28,10 +28,7 @@
 
 <script>
 export default {
-  name: "Hero",
-  props: {
-    msg: String
-  }
+  name: "Hero"
 }
 </script>
 

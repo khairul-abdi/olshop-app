@@ -13,6 +13,7 @@
         <About/>
       </div>
     </div>
+    <Login></Login>
   </div>
 </template>
 
@@ -21,6 +22,8 @@ import Navbar from '@/components/Navbar.vue'
 import Hero from '@/components/Hero.vue';
 import Products from '@/sections/Products.vue';
 import About from '@/components/About.vue'
+import Login from '@/components/Login.vue'
+
 
 export default {
   name: 'Home',
@@ -28,7 +31,8 @@ export default {
     Navbar,
     Hero,
     Products,
-    About
+    About,
+    Login
   }
 }
 </script>

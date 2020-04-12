@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
 import Overview from '../components/Overview.vue'
 import Products from  '../components/Products.vue'
+import Orders from  '../components/Orders.vue'
 
 
 Vue.use(VueRouter)
@@ -28,6 +29,11 @@ const routes = [
         path: 'products',
         name: 'Products',
         component: Products
+      },
+      {
+        path: 'orders',
+        name: 'Orders',
+        component: Orders
       }
     ]
   }
