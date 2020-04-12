@@ -87,7 +87,11 @@ export default {
   methods: {
     register() {
       fb.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .catch(function(error) {
+        .then((user) => {
+          $('#login').modal('hide')
+          this.$router.replace('admin')
+        })
+        .catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
