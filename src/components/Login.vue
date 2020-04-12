@@ -32,7 +32,7 @@
                             </div>
 
                              <div class="form-group">
-                                <button class="btn btn-primary">Login</button>
+                                <button class="btn btn-primary" @click="login">Login</button>
                             </div>
 
                         </div>
@@ -85,6 +85,23 @@ export default {
     }
   },
   methods: {
+    login() {
+      fb.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          $('#login').modal('hide')
+          this.$router.replace('admin')
+        })
+        .catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+        });
+    },
     register() {
       fb.auth().createUserWithEmailAndPassword(this.email, this.password)
         .then((user) => {
@@ -93,14 +110,14 @@ export default {
         })
         .catch((error) => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode == 'auth/weak-password') {
-          alert('The password is too weak.');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          if (errorCode == 'auth/weak-password') {
+            alert('The password is too weak.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
       });
     }
   }

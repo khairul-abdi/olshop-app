@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import jQuery from 'jquery'
 import Scrollspy from 'vue2-scrollspy'
+import { fb } from './firebase'
 
 window.$ = window.jQuery = jQuery
 
@@ -14,7 +15,9 @@ Vue.use(Scrollspy)
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+fb.auth().onAuthStateChanged( user => {
+    new Vue({
+      router,
+      render: h => h(App)
+    }).$mount('#app')
+})
