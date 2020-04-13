@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" v-model="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" v-model="password" @keyup.enter="register" class="form-control" id="password" placeholder="Password">
                             </div>
 
                             <div class="form-group">
