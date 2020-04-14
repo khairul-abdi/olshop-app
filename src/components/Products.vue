@@ -34,6 +34,15 @@
                       <td>
                         {{ product.name }}
                       </td>
+
+                      <td>
+                        {{ product.price }}
+                      </td>
+
+                      <td>
+                        <button class="btn btn-primary mr-2">Edit</button>
+                        <button class="btn btn-danger" @click="deleteProduct(product)">Delete</button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -125,7 +134,27 @@ export default {
     },
     updateProduct(){},
     editProduct(product){},
-    deleteProduct(doc) {},
+    deleteProduct(doc) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+
+          this.$firestore.products.doc(doc['.key']).delete()
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Deleted in successfully'
+          })
+        }
+      })
+    },
     readData() {},
     addProduct(){
       this.$firestore.products.add(this.product);
