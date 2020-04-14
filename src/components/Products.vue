@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="form-group">
-                  <textarea name="description" class="form-control" placeholder="Product description" v-model='product.description' cols="30" rows="10"></textarea>
+                  <vue-editor v-model="product.description"></vue-editor>
                 </div>
               </div>
               <!-- product sidebar -->
@@ -83,13 +83,18 @@
                 </div>
 
                 <div class="form-group">
-                  <input type="text" placeholder="Product tags" v-model="product.tag" class="form-control">
+                  <b-form-tags
+                    input-id="tags-remove-on-delete"
+                    :input-attrs="{ 'aria-describedby': 'tags-remove-on-delete-help' }"
+                    v-model="product.tag"
+                    tag-variant="primary"
+                    separator=" "
+                    placeholder="Enter product tags"
+                    remove-on-delete
+                    class="mb-2"
+                  ></b-form-tags>
                 </div>
 
-                <!-- <div class="form-group">
-                  <label for="product_image">Product Images</label>
-                  <input type="file" @change="uploadImage()" class="form-control">
-                </div> -->
                 <div class="custom-file form-group">
                   <input type="file" class="custom-file-input" id="customFile">
                   <label class="custom-file-label" for="customFile">Product image</label>
@@ -110,10 +115,14 @@
 </template>
 
 <script>
+import { VueEditor } from "vue2-editor";
 import { fb, db } from '../firebase'
 
 export default {
   name: "Products",
+  components: {
+    VueEditor
+  },
   data() {
     return {
       products:[],
@@ -121,7 +130,7 @@ export default {
         name: null,
         description: null,
         price: null,
-        tag: null,
+        tag: [],
         image: null
       },
       activeItem: null,

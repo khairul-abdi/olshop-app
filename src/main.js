@@ -6,17 +6,21 @@ import Scrollspy from 'vue2-scrollspy'
 import Swal from 'sweetalert2'
 import { fb } from './firebase'
 import VueFirestore from 'vue-firestore'
+import { Toast } from './assets/js/sweetAlert'
+import { BootstrapVue } from 'bootstrap-vue'
 import 'popper.js'
 import 'bootstrap'
 import './assets/scss/app.scss'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 require('firebase/firestore')
-import { Toast } from './assets/js/sweetAlert'
 
 Vue.use(VueFirestore, {
   key: 'id',         // the name of the property. Default is '.key'.
   enumerable: true  //  whether it is enumerable or not. Default is true.
 })
 
+Vue.use(BootstrapVue)
 Vue.use(VueFirestore)
 Vue.use(Scrollspy)
 Vue.config.productionTip = false
