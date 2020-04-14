@@ -34,20 +34,27 @@
 
         <h3>Products list</h3>
 
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="product in products">
-              <td>{{ product.name }}</td>
-              <td>{{ product.price }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Modify</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(product, index) in products" :key="index">
+                <td>{{ product.data().name }}</td>
+                <td>{{ product.data().price }}</td>
+                <td>
+                  <button class="btn btn-primary">Edit</button>
+                  <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
     </div>
   </div>
@@ -68,11 +75,15 @@ export default {
     }
   },
   methods: {
+    deleteProduct(doc) {
+      alert(doc)
+    },
     readData() {
       db.collection("products").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
-          this.products.push(doc.data())
+          this.products.push(doc)
+          // console.log('Hello doc : ',doc.data())
         });
       });
     },
