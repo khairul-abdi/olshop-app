@@ -30,6 +30,11 @@
                   </thead>
 
                   <tbody>
+                    <tr v-for="(product, index) in products" :key="index">
+                      <td>
+                        {{ product.name }}
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
             </div>
@@ -124,6 +129,7 @@ export default {
     readData() {},
     addProduct(){
       this.$firestore.products.add(this.product);
+      $('#product').modal('hide');
     }
   },
   created() {}
