@@ -40,7 +40,7 @@
                       </td>
 
                       <td>
-                        <button class="btn btn-primary mr-2">Edit</button>
+                        <button class="btn btn-primary mr-2" @click="editProduct(product)">Edit</button>
                         <button class="btn btn-danger" @click="deleteProduct(product)">Delete</button>
                       </td>
                     </tr>
@@ -56,7 +56,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="productLabel">Edit Product</h5>
+            <h5 class="modal-title" id="productLabel">{{ titleModal }} Product</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -86,9 +86,13 @@
                   <input type="text" placeholder="Product tags" v-model="product.tag" class="form-control">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="product_image">Product Images</label>
                   <input type="file" @change="uploadImage()" class="form-control">
+                </div> -->
+                <div class="custom-file form-group">
+                  <input type="file" class="custom-file-input" id="customFile">
+                  <label class="custom-file-label" for="customFile">Product image</label>
                 </div>
 
                 </div>
@@ -96,7 +100,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="addProduct()">Save Changes</button>
+            <button type="button" class="btn btn-primary" @click="addProduct()" v-if="modal == 'new'">Save Changes</button>
+            <button type="button" class="btn btn-primary" @click="updateProduct()" v-if="modal == 'edit'">Apply Changes</button>
           </div>
         </div>
       </div>
@@ -119,7 +124,9 @@ export default {
         tag: null,
         image: null
       },
-      activeItem: null
+      activeItem: null,
+      modal: null,
+      titleModal: null
     }
   },
   firestore () {
@@ -130,10 +137,26 @@ export default {
   methods: {
     uploadImage(){},
     addNew() {
+      this.modal = 'new'
+      this.titleModal = 'Add'
       $('#product').modal('show');
     },
-    updateProduct(){},
-    editProduct(product){},
+    updateProduct(){
+      this.$firestore.products.doc(this.product.id).update(this.product)
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Updated successfully'
+      })
+
+      $('#product').modal('hide');
+    },
+    editProduct(product){
+      this.modal = 'edit'
+      this.titleModal = 'Edit'
+      this.product = product
+      $('#product').modal('show');
+    },
     deleteProduct(doc) {
       Swal.fire({
         title: 'Are you sure?',
@@ -150,7 +173,7 @@ export default {
 
           Toast.fire({
             icon: 'success',
-            title: 'Deleted in successfully'
+            title: 'Deleted successfully'
           })
         }
       })
@@ -158,6 +181,12 @@ export default {
     readData() {},
     addProduct(){
       this.$firestore.products.add(this.product);
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Product created successfully'
+        })
+
       $('#product').modal('hide');
     }
   },
