@@ -4,6 +4,10 @@ import router from './router'
 import jQuery from 'jquery'
 import Scrollspy from 'vue2-scrollspy'
 import { fb } from './firebase'
+import VueFirestore from 'vue-firestore'
+require('firebase/firestore')
+
+Vue.use(VueFirestore)
 
 window.$ = window.jQuery = jQuery
 
