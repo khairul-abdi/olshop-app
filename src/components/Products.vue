@@ -48,7 +48,7 @@
                 <td>{{ product.data().name }}</td>
                 <td>{{ product.data().price }}</td>
                 <td>
-                  <button class="btn btn-primary">Edit</button>
+                  <button class="btn btn-primary" @click="editProduct(product)">Edit</button>
                   <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>
                 </td>
               </tr>
@@ -56,6 +56,35 @@
           </table>
         </div>
 
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="edit" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editLabel">Edit Product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <input type="text" placeholder="Product Name" v-model="product.name" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <input type="text" placeholder="Price"  @keyup.enter="updateProduct" v-model="product.price" class="form-control">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="updateProduct()">Save Changes</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -71,10 +100,30 @@ export default {
       product: {
         name: null,
         price: null
-      }
+      },
+      activeItem: null
     }
   },
   methods: {
+    updateProduct(){
+      
+      // Set the "capital" field of the city 'DC'
+      db.collection("products").doc(this.activeItem).update(this.product)
+      .then(function() {
+        console.log("Document successfully updated!");
+        $('#edit').modal('hide')
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+
+    },
+    editProduct(product){
+      $('#edit').modal('show')
+      this.product = product.data()
+      this.activeItem = product.id
+    },
     deleteProduct(doc) {
       if(confirm('Are you sure ?')) {
 
