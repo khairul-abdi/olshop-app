@@ -6,7 +6,7 @@ import Scrollspy from 'vue2-scrollspy'
 import Swal from 'sweetalert2'
 import { fb } from './firebase'
 import VueFirestore from 'vue-firestore'
-import { Toast } from './assets/js/sweetAlert'
+// import { Toast } from './assets/js/sweetAlert'
 import { BootstrapVue } from 'bootstrap-vue'
 import 'popper.js'
 import 'bootstrap'
@@ -18,6 +18,18 @@ require('firebase/firestore')
 Vue.use(VueFirestore, {
   key: 'id',         // the name of the property. Default is '.key'.
   enumerable: true  //  whether it is enumerable or not. Default is true.
+})
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  // timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
 })
 
 Vue.use(BootstrapVue)

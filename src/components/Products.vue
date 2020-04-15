@@ -88,7 +88,7 @@
                     :input-attrs="{ 'aria-describedby': 'tags-remove-on-delete-help' }"
                     v-model="product.tag"
                     tag-variant="primary"
-                    separator=" "
+                    separator=" ,;"
                     placeholder="Enter product tags"
                     remove-on-delete
                     class="mb-2"
@@ -96,11 +96,11 @@
                 </div>
 
                 <div class="custom-file form-group">
-                  <input type="file" class="custom-file-input" id="customFile">
+                  <input type="file" class="custom-file-input" id="customFile" @change="uploadImage">
                   <label class="custom-file-label" for="customFile">Product image</label>
                 </div>
 
-                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -144,7 +144,27 @@ export default {
     }
   },
   methods: {
-    uploadImage(){},
+    uploadImage(e){
+      let file = e.target.files[0]
+      var storageRef = fb.storage().ref('products/' + file.name);
+      let uploadTask = storageRef.put(file)
+
+      uploadTask.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+      }, (error) => {
+        // Handle unsuccessful uploads
+      }, () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          this.product.image = downloadURL
+          console.log('File available at', downloadURL);
+        });
+      });
+    }, 
     addNew() {
       this.modal = 'new'
       this.titleModal = 'Add'
@@ -161,12 +181,15 @@ export default {
       $('#product').modal('hide');
     },
     editProduct(product){
+      console.log(product)
       this.modal = 'edit'
       this.titleModal = 'Edit'
       this.product = product
       $('#product').modal('show');
     },
     deleteProduct(doc) {
+      this.product = doc
+      
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -177,8 +200,7 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.value) {
-
-          this.$firestore.products.doc(doc['.key']).delete()
+          this.$firestore.products.doc(this.product.id).delete()
 
           Toast.fire({
             icon: 'success',
@@ -187,7 +209,6 @@ export default {
         }
       })
     },
-    readData() {},
     addProduct(){
       this.$firestore.products.add(this.product);
 
@@ -198,8 +219,7 @@ export default {
 
       $('#product').modal('hide');
     }
-  },
-  created() {}
+  }
 }
 </script>
 
