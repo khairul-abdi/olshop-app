@@ -100,6 +100,12 @@
                   <label class="custom-file-label" for="customFile">Product image</label>
                 </div>
 
+                <div class="form-groupt d-flex">
+                  <div class="mt-3 mr-1"  v-for="(image, index) in product.images" :key="index">
+                    <img :src="image" width="80px">
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -131,7 +137,7 @@ export default {
         description: null,
         price: null,
         tag: [],
-        image: null
+        images: []
       },
       activeItem: null,
       modal: null,
@@ -145,25 +151,28 @@ export default {
   },
   methods: {
     uploadImage(e){
-      let file = e.target.files[0]
-      var storageRef = fb.storage().ref('products/' + file.name);
-      let uploadTask = storageRef.put(file)
 
-      uploadTask.on('state_changed', (snapshot) => {
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      }, (error) => {
-        // Handle unsuccessful uploads
-      }, () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          this.product.image = downloadURL
-          console.log('File available at', downloadURL);
+      if(e.target.files[0]) {
+        let file = e.target.files[0]
+        var storageRef = fb.storage().ref('products/' + file.name);
+        let uploadTask = storageRef.put(file)
+  
+        uploadTask.on('state_changed', (snapshot) => {
+          // Observe state change events such as progress, pause, and resume
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+        }, (error) => {
+          // Handle unsuccessful uploads
+        }, () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.product.images.push(downloadURL)
+            console.log('File available at', downloadURL);
+          });
         });
-      });
+      }
     }, 
     addNew() {
       this.modal = 'new'
