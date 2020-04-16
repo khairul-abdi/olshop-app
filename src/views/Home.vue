@@ -7,7 +7,7 @@
         <Hero/>
       </div>
       <div>
-        <Products/>
+        <products-list></products-list>
       </div>
       <div>
         <About/>
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
 import Hero from '@/components/Hero.vue';
 import Products from '@/sections/Products.vue';
 import About from '@/components/About.vue'
@@ -30,7 +29,6 @@ import Login from '@/components/Login.vue'
 export default {
   name: 'Home',
   components: {
-    Navbar,
     Hero,
     Products,
     About,

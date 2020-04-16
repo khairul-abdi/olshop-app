@@ -8,6 +8,7 @@ import { fb } from './firebase'
 import VueFirestore from 'vue-firestore'
 import { Toast } from './assets/js/sweetAlert'
 import { BootstrapVue } from 'bootstrap-vue'
+import VueCarousel from 'vue-carousel'
 import 'popper.js'
 import 'bootstrap'
 import './assets/scss/app.scss'
@@ -16,18 +17,22 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 require('firebase/firestore')
 
 Vue.use(VueFirestore, {
-  key: 'id',         // the name of the property. Default is '.key'.
-  enumerable: true  //  whether it is enumerable or not. Default is true.
+  key: 'id',         
+  enumerable: true  
 })
 
 Vue.use(BootstrapVue)
 Vue.use(VueFirestore)
 Vue.use(Scrollspy)
+Vue.use(VueCarousel)
 Vue.config.productionTip = false
 
 window.$ = window.jQuery = jQuery
 window.Swal = Swal
 window.Toast = Toast
+
+Vue.component('Navbar', require('./components/Navbar.vue').default);
+Vue.component('ProductsList', require('./sections/ProductList.vue').default)
 
 fb.auth().onAuthStateChanged( user => {
     new Vue({

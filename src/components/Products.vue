@@ -234,7 +234,7 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.value) {
-          this.$firestore.products.doc(this.product.id).delete()
+          this.$firestore.products.doc(doc.id).delete()
 
           Toast.fire({
             icon: 'success',
