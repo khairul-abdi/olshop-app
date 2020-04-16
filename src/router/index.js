@@ -5,7 +5,7 @@ import Admin from '../views/Admin.vue'
 import Overview from '../components/Overview.vue'
 import Products from  '../components/Products.vue'
 import Orders from  '../components/Orders.vue'
-import Profile from  '../components/Profile.vue'
+import Profile from  '../views/Profile.vue'
 import { fb } from '../firebase'
 
 

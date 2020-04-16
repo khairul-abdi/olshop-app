@@ -1,6 +1,5 @@
 <template>
   <div class="admin">
-    
         <div class="page-wrapper default-theme sidebar-bg bg1 boder-radius-on"
           :class="[toggle ? 'toggled' : '']">
         <a 
@@ -31,7 +30,7 @@
                         <span class="user-name">Jhon
                             <strong>Smith</strong>
                         </span>
-                        <span class="user-role">Administrator</span>
+                        <span class="user-role">{{ email }}</span>
                         <span class="user-status">
                             <i class="fa fa-circle"></i>
                             <span>Online</span>
@@ -117,7 +116,9 @@ export default {
   },
   data() {
     return {
-      toggle : true
+      toggle : true,
+      name: null,
+      email: null
     }
   },
   methods: {
@@ -156,6 +157,11 @@ export default {
         console.log(err)
       })
     }
+  },
+  created(){
+    var user = fb.auth().currentUser
+    this.name = user.displayName
+    this.email = user.email
   }
 }
 

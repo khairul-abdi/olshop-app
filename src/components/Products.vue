@@ -1,14 +1,14 @@
 <template>
   <div class="container products">
     <div class="container h-100">
-        <div class="container intro h-100">
-          <div class="container row h-100 justify-content-center align-items-center">
+        <div class="container intro">
+          <div class="container row justify-content-center align-items-center">
             <div class="col-md-6">
               <h3>Products Page</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi consequuntur iure, consequatur facilis minima laudantium quo quisquam magnam est officia.</p>
             </div>
              <div class="col-md-6">
-              <img src="/img/svg/admin/products.svg" class="img-fluid">
+              <img src="/img/svg/admin/products.svg" width="300" class="img-fluid ml-5">
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@
                   <b-form-tags
                     input-id="tags-remove-on-delete"
                     :input-attrs="{ 'aria-describedby': 'tags-remove-on-delete-help' }"
-                    v-model="product.tag"
+                    v-model="product.tags"
                     tag-variant="primary"
                     separator=" ,;"
                     placeholder="Enter product tags"
@@ -139,7 +139,7 @@ export default {
         name: null,
         description: null,
         price: null,
-        tag: [],
+        tags: [],
         images: []
       },
       activeItem: null,
@@ -149,7 +149,7 @@ export default {
   },
   firestore () {
     return {
-        products: db.collection('products')
+      products: db.collection('products')
     }
   },
   methods: {
@@ -157,7 +157,7 @@ export default {
 
       if(e.target.files[0]) {
         let file = e.target.files[0]
-        var storageRef = fb.storage().ref('products/' + file.name);
+        var storageRef = fb.storage().ref('products/' + Math.random() + '_'  + file.name);
         let uploadTask = storageRef.put(file)
   
         uploadTask.on('state_changed', (snapshot) => {
@@ -189,9 +189,19 @@ export default {
         console.log('an error occurred')
       });
     },
+    reset(){
+      this.product = {
+        name: null,
+        description: null,
+        price: null,
+        tags: [],
+        images: []
+      }
+    },
     addNew() {
       this.modal = 'new'
       this.titleModal = 'Add'
+      this.reset()
       $('#product').modal('show');
     },
     updateProduct(){
@@ -205,7 +215,7 @@ export default {
       $('#product').modal('hide');
     },
     editProduct(product){
-      console.log(product)
+      // console.log(product)
       this.modal = 'edit'
       this.titleModal = 'Edit'
       this.product = product
