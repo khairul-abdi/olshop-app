@@ -15,16 +15,18 @@
                         <div class="card-body">
                           <div class="d-flex justify-content-between">
                             <h5 class="card-title">{{ product.name }}</h5>
-                            <h5 class="card-priceS">{{ product.price | currency }}</h5>
-
+                            <!-- <h5 class="card-priceS">$ {{ product.price | currency }}</h5> -->
+                            <h5 class="card-priceS">$ {{ product.price }}</h5>
                           </div>
-                           
-                            <add-to-cart 
-                                :image="getImage(product.images)"
-                                :p-id="product.id"
-                                :price="product.price"
-                                :name="product.name">
-                            </add-to-cart>
+                          
+                          <add-to-cart 
+                            :product-image="getImage(product.images)"
+                            :product-id="product.id"
+                            :price="product.price"
+                            :name="product.name"
+                          >
+                          </add-to-cart>
+                            
                         </div>
                     </div>
               </div>
@@ -41,17 +43,12 @@ import {db} from '../firebase';
 
 export default {
   name: "Products-list",
-  props: {
-    msg: String
-  },
-
-data(){
+  data(){
     return {
         products: [],
      
     }
   },
-
   methods:{
 
     getImage(images){
@@ -59,7 +56,6 @@ data(){
     }
 
   },
-
   firestore(){
       return {
         products: db.collection('products'),
@@ -75,7 +71,4 @@ data(){
         padding-bottom: 3rem;
     }
 
-    .card-img-top {
-      width: 250px !important;
-    }
 </style>
