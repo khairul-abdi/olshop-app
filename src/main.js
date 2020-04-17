@@ -15,7 +15,10 @@ import './assets/scss/app.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue2Filters from 'vue2-filters'
+import Vuex from 'vuex'
+import store from './store.js'
 require('firebase/firestore')
+
 
 Vue.use(VueFirestore, {
   key: 'id',         
@@ -27,6 +30,7 @@ Vue.use(VueFirestore)
 Vue.use(Scrollspy)
 Vue.use(VueCarousel)
 Vue.use(Vue2Filters)
+Vue.use(Vuex)
 Vue.config.productionTip = false
 
 window.$ = window.jQuery = jQuery
@@ -37,10 +41,14 @@ Vue.component('Navbar', require('./components/Navbar.vue').default);
 Vue.component('add-to-cart', require('./components/AddToCart.vue').default);
 Vue.component('ProductsList', require('./sections/ProductList.vue').default)
 
+let app = ''
 
 fb.auth().onAuthStateChanged( user => {
+  if(!app) {
     new Vue({
       router,
+      store,
       render: h => h(App)
     }).$mount('#app')
+  }
 })
