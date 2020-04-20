@@ -5,6 +5,7 @@ import Admin from '../views/Admin.vue'
 import Overview from '../components/Overview.vue'
 import Products from  '../components/Products.vue'
 import Orders from  '../components/Orders.vue'
+import Checkout from  '../components/Checkout.vue'
 import Profile from  '../views/Profile.vue'
 import { fb } from '../firebase'
 
@@ -44,7 +45,12 @@ const routes = [
         component: Profile
       }
     ]
-  }
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout
+  },
 ]
 
 const router = new VueRouter({
