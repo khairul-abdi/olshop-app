@@ -10,19 +10,23 @@ export default {
   props: {
     name: String,
     price: String,
-    productId: String
+    image: String,
+    pId: String
   },
   data() {
     return {
       item: {
         productName: this.name,
         productPrice: this.price,
-        product_id: this.id
+        productImage: this.image,
+        productId: this.pId,
+        productQuantity: 1
       }
     }
   },
   methods: {
     addToCart() {
+      $('#miniCart').modal('show')
       this.$store.commit('addToCart', this.item)
     }
   }

@@ -39,6 +39,7 @@ window.Toast = Toast
 
 Vue.component('Navbar', require('./components/Navbar.vue').default);
 Vue.component('add-to-cart', require('./components/AddToCart.vue').default);
+Vue.component('mini-cart', require('./components/MiniCart.vue').default);
 Vue.component('ProductsList', require('./sections/ProductList.vue').default)
 
 let app = ''
