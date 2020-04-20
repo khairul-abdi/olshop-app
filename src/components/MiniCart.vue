@@ -15,7 +15,9 @@
                 <li v-for="(item, index) in this.$store.state.cart" :key="index" class="media">
                   <img :src="item.productImage" width="80px" class="align-self-center mr-3">
                   <div class="media-body">
-                    <h5 class="mt-0">{{ item.productName }}</h5>
+                    <h5 class="mt-0">{{ item.productName }}
+                      <span class="float-right" @click="$store.commit('removeFromCart', item)">X</span>
+                    </h5>
                     <p class="mt-0">{{ item.productPrice | currency }}</p>
                     <p class="mt-0">Quantity : {{ item.productQuantity }}</p>
                   </div>
@@ -44,3 +46,20 @@ export default {
   }
 }
 </script>
+
+<style lang="css">
+
+  .float-right{
+    color: #7f7f7f;
+    font-size: 16px;
+    text-shadow: 0 1px 0 #fff;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .float-right:hover {
+    cursor: pointer;
+    color: #3f3f3f;
+    transition: all 0.5s;
+  }
+</style>
