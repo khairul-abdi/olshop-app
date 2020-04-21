@@ -6,3 +6,12 @@ const functions = require('firebase-functions');
 exports.helloWorld = functions.https.onRequest((request, response) => {
  response.send("Hello from Firebase!");
 });
+
+exports.Hello = functions.https.onRequest((req, res) => {
+
+  if (req.method == 'POST') {
+    res.send("Hello " + req.query.name)
+  } else {
+    res.send('Please send post request')
+  }
+})
