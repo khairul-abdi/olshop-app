@@ -91,13 +91,13 @@
 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <input type="text"  v-model="account.password" placeholder="New password" class="form-control">
+                            <input type="password"  v-model="account.password" placeholder="New password" class="form-control">
                           </div>
                         </div>
 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <input type="text" v-model="account.confirmPassword"  placeholder="Confirm password" class="form-control">
+                            <input type="password" v-model="account.confirmPassword"  placeholder="Confirm password" class="form-control">
                           </div>
                         </div>
 

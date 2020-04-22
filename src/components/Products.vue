@@ -16,7 +16,7 @@
         <hr>
           <div class="product-test">
             <h3 class="d-inline-block">Products list</h3>
-            <button class="btn btn-primary float-right"  @click="addNew">Add Product</button>
+            <button class="btn btn-primary btn-product"  @click="addNew">Add Product</button>
 
             <div class="table-responsive">
               
@@ -273,5 +273,9 @@ export default {
   .img-wrapp span.delete-img:hover{
     cursor: pointer;
     color: black;
+  }
+
+  .btn-product {
+    float: right;
   }
 </style>
