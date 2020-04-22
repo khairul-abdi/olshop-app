@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 src/assets/_config.scss
+src/views/Checkout spam.vue
+src/views/Checkouts test.vue
+
 
 # local env files
 .env.local
