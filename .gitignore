@@ -2,7 +2,7 @@
 node_modules
 src/assets/_config.scss
 src/views/Checkout-spam.vue
-src/views/Checkouts-test.vue
+src/views/Checkout-stripes.vue
 
 
 # local env files
